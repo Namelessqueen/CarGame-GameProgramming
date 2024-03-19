@@ -22,7 +22,7 @@ namespace GXPEngine
             posX = game.width / 2 + (Utils.Random(-1, 2) * Enemy.gridSize);
         }
         
-        public void Update()
+        void Update()
         {
             OffSrceenCheck();
             PowerUpPowers();

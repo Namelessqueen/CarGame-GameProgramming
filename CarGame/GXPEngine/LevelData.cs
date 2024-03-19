@@ -10,13 +10,16 @@ namespace GXPEngine
     internal class LevelData
     {
         int points;
-        public LevelData()
-        {
+        int levels;
+        public int Point()
+        { 
+
+             return points;
             
         }
-        public int Point()
+        public int Level()
         {
-            return points;
+            return levels;
         }
     }
 }

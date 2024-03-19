@@ -25,7 +25,7 @@ internal class Enemy : AnimationSprite
         SetFrame(Utils.Random(0,3));
         posX = game.width / 2 + (Utils.Random(-1, 2) * gridSize);
     }
-    public void Update()
+    void Update()
     {
         OffScreenCheck();
         SetXY(posX, posY);

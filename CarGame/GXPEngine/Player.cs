@@ -17,7 +17,7 @@ internal class Player : Sprite
 
           
     }
-    public void Update()
+    void Update()
     {
         movement();
         collisionPlayer();

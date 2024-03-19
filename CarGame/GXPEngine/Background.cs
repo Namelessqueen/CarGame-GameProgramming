@@ -17,7 +17,7 @@ internal class Background : Sprite
     }
 
 
-    public void Update()
+    void Update()
     {
 
     }
