@@ -1,0 +1,7 @@
+D:\Gebruiker\Saxion\2.3-2.10 Game Programming\CarGame-GameProgramming\CarGame\GXPEngine\bin\Debug\GXPEngine.exe.config
+D:\Gebruiker\Saxion\2.3-2.10 Game Programming\CarGame-GameProgramming\CarGame\GXPEngine\bin\Debug\GXPEngine.exe
+D:\Gebruiker\Saxion\2.3-2.10 Game Programming\CarGame-GameProgramming\CarGame\GXPEngine\bin\Debug\GXPEngine.pdb
+D:\Gebruiker\Saxion\2.3-2.10 Game Programming\CarGame-GameProgramming\CarGame\GXPEngine\obj\x86\Debug\GXPEngine.csproj.AssemblyReference.cache
+D:\Gebruiker\Saxion\2.3-2.10 Game Programming\CarGame-GameProgramming\CarGame\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
+D:\Gebruiker\Saxion\2.3-2.10 Game Programming\CarGame-GameProgramming\CarGame\GXPEngine\obj\x86\Debug\GXPEngine.exe
+D:\Gebruiker\Saxion\2.3-2.10 Game Programming\CarGame-GameProgramming\CarGame\GXPEngine\obj\x86\Debug\GXPEngine.pdb
