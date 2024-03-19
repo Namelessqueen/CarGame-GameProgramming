@@ -9,13 +9,22 @@ namespace GXPEngine
 {
     internal class LevelData
     {
-        int points;
+        int currentPoints;
+        int currentHealth;
         int levels;
-        public int Point()
-        { 
-
-             return points;
+        public int PointChange(int pChange)
+        {
+            int Change = pChange;
+            currentPoints += Change;
+            return currentPoints;
             
+        }
+        public int healthChange(int pChange)
+        {
+            int Change = pChange;
+            currentHealth += Change;
+            return currentHealth;
+
         }
         public int Level()
         {

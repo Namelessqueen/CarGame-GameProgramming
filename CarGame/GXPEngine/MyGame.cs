@@ -46,7 +46,7 @@ public class MyGame : Game {
     {
         if(Input.GetKeyDown(Key.SPACE))
         {
-            PowerUp powerUp = new PowerUp();
+            PowerUp powerUp = new PowerUp(1);
             AddChild(powerUp);
         }
     }

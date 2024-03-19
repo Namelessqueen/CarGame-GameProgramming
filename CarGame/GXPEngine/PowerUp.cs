@@ -12,10 +12,15 @@ namespace GXPEngine
         private float powerUpTimer;
         private float SecondsOfPowerUp = 5;
         private float travelSpeed = 4;
+        int powerUpType;
+        string filename;
         float posX;
         float posY;
-        public PowerUp() : base("Hourglass.png")
+
+        public PowerUp(int pType, string pFilename = "Hourglass.png") : base(pFilename)
         {
+            filename = pFilename;
+            powerUpType = pType;
             SetOrigin(width / 2, height / 2);
             SetXY((Utils.Random(-1, 2) * Enemy.gridSize),-height);
             scale= 1.2f;
@@ -24,6 +29,7 @@ namespace GXPEngine
         
         void Update()
         {
+            filename = "square.png";
             OffSrceenCheck();
             PowerUpPowers();
 

@@ -27,7 +27,6 @@ internal class Player : Sprite
 
     void movement()
     {
-        Console.WriteLine(x);
         //SetXY(posX, posY);
         float distPlayerX = game.width / 2 - x;
         float distEdge = Enemy.gridSize + 20;
@@ -60,7 +59,6 @@ internal class Player : Sprite
                 PowerUp.SetXY(0,0);
             }
         }
-
 
     }
 
