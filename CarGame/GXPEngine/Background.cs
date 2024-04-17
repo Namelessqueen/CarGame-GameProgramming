@@ -15,11 +15,5 @@ internal class Background : Sprite
         this.scale = pScale;
         SetXY(game.width/ 2, game.height / 2);
     }
-
-
-    void Update()
-    {
-
-    }
 }
 

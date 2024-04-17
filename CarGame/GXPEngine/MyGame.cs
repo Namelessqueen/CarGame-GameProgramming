@@ -1,56 +1,50 @@
 using System;                                   // System contains a lot of default C# libraries 
 using GXPEngine;                                // GXPEngine contains the engine
 using System.Drawing;
-using System.IO;                           // System.Drawing contains drawing tools such as Color definitions
+using System.IO;
+using System.Collections.Generic;                           // System.Drawing contains drawing tools such as Color definitions
 
 public class MyGame : Game {
 
-	Player player;
-    float nextCar = 0;
+    Screens beginScreen;
+
+    Sound gameOver;
+    SoundChannel channel;
+
     public MyGame() : base(800, 600, false, false, 1200,900)     
 	{
-		EasyDraw canvas = new EasyDraw(800, 600, false);
-		player = new Player();
-		Background lanes = new Background("lanes.jpg", 1.2f);
-        Background grass = new Background("Grass.png", 1.5f);
+        beginScreen = new Screens("BeginScreen.jpeg", 0.8f);
+        gameOver = new Sound("videogame-death-sound-43894.mp3");
 
-       
-        player.SetXY(width / 2, height - player.height);
+        AddChild(beginScreen);
 
-        AddChild(grass);
-        AddChild(lanes);
-        AddChild(canvas);
-        AddChild(player);
         Console.WriteLine("MyGame initialized");
+
 	}
 
-	void Update() 
-	{
-
-        SpawnEnemy();
-        SpawnPowerUp();
-    }
-
-	void SpawnEnemy()
-	{
-        nextCar += Time.deltaTime / 1000f;
-        if (nextCar > 3f)
-        {
-            Enemy enemy = new Enemy();
-            AddChild(enemy);
-            Console.WriteLine("new car");
-            nextCar = 0;
-        }
-    }
-    void SpawnPowerUp()
+    void DestroyAll()
     {
-        if(Input.GetKeyDown(Key.SPACE))
+        List<GameObject> list = GetChildren();
+        foreach (GameObject obj in list)
         {
-            PowerUp powerUp = new PowerUp(1);
-            AddChild(powerUp);
+            obj.Destroy();
         }
     }
 
+    public void loadLevel()
+    {
+        DestroyAll();
+        if (channel != null) channel.Stop();
+        AddChild(new Level());
+        AddChild(new canvas());
+    }
+
+    public void Gameover()
+    {
+        DestroyAll();
+        AddChild(new Screens("EndScreen.jpg", 0.9f));
+        channel = gameOver.Play();
+    }
 
     static void Main()                          // Main() is the first method that's called when the program is run
 	{

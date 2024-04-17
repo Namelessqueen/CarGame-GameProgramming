@@ -1,68 +1,123 @@
-﻿using System;
+﻿using GXPEngine.Managers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GXPEngine;
+using TiledMapParser;
 
-namespace GXPEngine
+internal class PowerUp : Sprite
 {
-    internal class PowerUp : Sprite
+   
+    private float travelSpeed = 4;
+    Player player;
+    float posX;
+    float posY;
+
+    public PowerUp(string pFilename = "square.png") : base(pFilename)
     {
-        public static bool isPowerUpActive;
-        private float powerUpTimer;
-        private float SecondsOfPowerUp = 5;
-        private float travelSpeed = 4;
-        int powerUpType;
-        string filename;
-        float posX;
-        float posY;
-
-        public PowerUp(int pType, string pFilename = "Hourglass.png") : base(pFilename)
-        {
-            filename = pFilename;
-            powerUpType = pType;
-            SetOrigin(width / 2, height / 2);
-            SetXY((Utils.Random(-1, 2) * Enemy.gridSize),-height);
-            scale= 1.2f;
-            posX = game.width / 2 + (Utils.Random(-1, 2) * Enemy.gridSize);
-        }
+        SetOrigin(width / 2, height / 2);
+        SetXY((Utils.Random(-1, 2) * Enemy.gridSize),-height);
+        scale= 1.2f;
+        posX = game.width / 2 + (Utils.Random(-1, 2) * Enemy.gridSize);
         
-        void Update()
-        {
-            filename = "square.png";
-            OffSrceenCheck();
-            PowerUpPowers();
+    }
 
+    protected virtual void Update()
+    {
+        OffSrceenCheck();
+        Move();
+    }
+    public void OffSrceenCheck()
+    {
+        if (y - height > game.height)
+        {
+            Console.WriteLine("Power up deleted");
+            LateDestroy();
         }
+    }
+    public void Move()
+    {
+        posY += travelSpeed;
+        rotation += 0.5f;
+        SetXY(posX, posY);
+    }
+   
+}
 
-        void PowerUpPowers()
+class TimerPowerUp : PowerUp
+{
+    private float powerUpTimer;
+    private float SecondsOfPowerUp = 5;
+    public static bool isTimerActive;
+    public TimerPowerUp(string pImage = "Hourglass.png") : base(pImage)
+    {
+
+    }
+    void Update()
+    {
+        base.Update();
+        PowerUpCooldown();
+    }
+
+    public void PowerUpCooldown()
+    {
+        if (isTimerActive)
         {
-            posY += travelSpeed;
-            rotation += 0.5f;
-            SetXY(posX, posY);
-
-            if (isPowerUpActive)
+            SetXY(game.width - width, game.height - height);
+            alpha = 0.8f;
+            powerUpTimer += Time.deltaTime / 1000f;
+            if (powerUpTimer > SecondsOfPowerUp)
             {
-                SetXY(game.width - width, game.height -  height);
-                scale = 3f;
-                alpha = 0.8f;
-                powerUpTimer += Time.deltaTime / 1000f;
-
-                if (powerUpTimer > SecondsOfPowerUp)
-                {
-                    isPowerUpActive = false;
-                    powerUpTimer = 0;
-                    Destroy();
-                }
+                isTimerActive = false;
+                powerUpTimer = 0;
             }
         }
-        void OffSrceenCheck()
-        {
-            if (y - height > game.height)
-            {
-                LateDestroy();
-            }
-        }
+    }
+}
+class HealtPowerUp : PowerUp
+{
+    public HealtPowerUp(string pImage = "health.png") : base(pImage)
+    {
 
     }
 }
+class ShrinkPowerUp : PowerUp
+{
+    private float powerUpTimer;
+    private float SecondsOfPowerUp = 8;
+    public static bool isShrinkActive;
+
+    Player player;
+
+    public ShrinkPowerUp(string pImage = "Shrink.png") : base(pImage)
+    {
+        this.scale = 0.1f;
+        player = game.FindObjectOfType<Player>();
+    }
+  
+    void Update()
+    {
+        base.Update();
+        PowerUpCooldown();
+    }
+
+    public void PowerUpCooldown()
+    {
+        if (isShrinkActive)
+        {
+            SetXY(game.width - width, game.height - height);
+            alpha = 0.8f;
+            powerUpTimer += Time.deltaTime / 1000f;
+            player.scaleX = 0.3f;
+            player.scaleY = 0.1f;
+            if (powerUpTimer > SecondsOfPowerUp)
+            {
+                isShrinkActive = false;
+                powerUpTimer = 0;
+            }
+        }
+    }
+}
+
